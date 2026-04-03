@@ -11,7 +11,7 @@
     "node": "24.x"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/ts-plugin": "^1.10.7",
     "@typescript-eslint/parser": "^8.57.2",
     "astro": "^6.1.2",
