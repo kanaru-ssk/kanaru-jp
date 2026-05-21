@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/ts-plugin": "^1.10.7",
+    "@astrojs/ts-plugin": "^1.10.9",
     "@typescript-eslint/parser": "^8.59.3",
     "astro": "^6.3.5",
     "eslint": "^10.3.0",
