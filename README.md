@@ -8,6 +8,8 @@ My personal website
 
 ## Tech
 
-- [Astro v5](https://astro.build/)
-- [TypeScript v5](https://www.typescriptlang.org/)
-- [GitHub](https://github.com/) (Actions and Pages)
+- [Hono](https://hono.dev/) (`hono/jsx`)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Biome](https://biomejs.dev/)
+- [Cloudflare Workers](https://developers.cloudflare.com/workers/) (Assets)
+- [GitHub Actions](https://github.com/features/actions)

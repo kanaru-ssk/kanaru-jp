@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kanaru.jp/sitemap-index.xml
+Sitemap: https://kanaru.jp/sitemap.xml
