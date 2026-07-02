@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "hono/jsx";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/components/logo";
 import { BASE_URL, EMAIL } from "@/lib/constant";
 import { DEFAULT_LANG, LANGS, type Lang } from "@/lib/lang";
 

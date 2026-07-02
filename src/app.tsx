@@ -1,7 +1,7 @@
 import { type Context, Hono } from "hono";
-import { BaseLayout } from "@/components/BaseLayout";
-import { HomeLayout } from "@/components/HomeLayout";
-import { NotFoundLayout } from "@/components/NotFoundLayout";
+import { BaseLayout } from "@/components/base-layout";
+import { HomeLayout } from "@/components/home-layout";
+import { NotFoundLayout } from "@/components/not-found-layout";
 import { CAREER_START_DATE } from "@/lib/constant";
 import { getDiffYear } from "@/lib/date";
 import { DEFAULT_LANG, getDictionary, LANG, type Lang } from "@/lib/lang";
@@ -19,11 +19,7 @@ function renderHome(c: Context, lang: Lang) {
   );
 }
 
-app.get("/", (c) => renderHome(c, DEFAULT_LANG));
-app.get("/en", (c) => renderHome(c, LANG.ENGLISH));
-app.get("/ja", (c) => renderHome(c, LANG.JAPANESE));
-
-app.notFound((c) => {
+function renderNotFound(c: Context) {
   const yearOfExperience = getDiffYear(CAREER_START_DATE, new Date());
   const { title, descriptions } = getDictionary(DEFAULT_LANG, yearOfExperience);
 
@@ -37,6 +33,13 @@ app.notFound((c) => {
     </BaseLayout>,
     404,
   );
-});
+}
+
+app.get("/", (c) => renderHome(c, DEFAULT_LANG));
+app.get("/en/", (c) => renderHome(c, LANG.ENGLISH));
+app.get("/ja/", (c) => renderHome(c, LANG.JAPANESE));
+app.get("/404", renderNotFound);
+
+app.notFound(renderNotFound);
 
 export default app;
