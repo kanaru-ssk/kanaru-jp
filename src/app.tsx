@@ -1,7 +1,7 @@
 import { type Context, Hono } from "hono";
-import { BaseLayout } from "@/components/BaseLayout";
-import { HomeLayout } from "@/components/HomeLayout";
-import { NotFoundLayout } from "@/components/NotFoundLayout";
+import { BaseLayout } from "@/components/base-layout";
+import { HomeLayout } from "@/components/home-layout";
+import { NotFoundLayout } from "@/components/not-found-layout";
 import { CAREER_START_DATE } from "@/lib/constant";
 import { getDiffYear } from "@/lib/date";
 import { DEFAULT_LANG, getDictionary, LANG, type Lang } from "@/lib/lang";
