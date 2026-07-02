@@ -19,11 +19,7 @@ function renderHome(c: Context, lang: Lang) {
   );
 }
 
-app.get("/", (c) => renderHome(c, DEFAULT_LANG));
-app.get("/en", (c) => renderHome(c, LANG.ENGLISH));
-app.get("/ja", (c) => renderHome(c, LANG.JAPANESE));
-
-app.notFound((c) => {
+function renderNotFound(c: Context) {
   const yearOfExperience = getDiffYear(CAREER_START_DATE, new Date());
   const { title, descriptions } = getDictionary(DEFAULT_LANG, yearOfExperience);
 
@@ -37,6 +33,13 @@ app.notFound((c) => {
     </BaseLayout>,
     404,
   );
-});
+}
+
+app.get("/", (c) => renderHome(c, DEFAULT_LANG));
+app.get("/en/", (c) => renderHome(c, LANG.ENGLISH));
+app.get("/ja/", (c) => renderHome(c, LANG.JAPANESE));
+app.get("/404", renderNotFound);
+
+app.notFound(renderNotFound);
 
 export default app;
