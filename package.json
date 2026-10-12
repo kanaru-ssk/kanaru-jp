@@ -2,24 +2,23 @@
   "name": "kanaru-jp",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"tsx watch scripts/build.ts\" \"wrangler dev\"",
-    "build": "tsx scripts/build.ts",
-    "preview": "wrangler dev",
+    "dev": "vite",
+    "build": "vite build && node scripts/ssg.ts",
+    "preview": "$npm_execpath run build && wrangler dev",
+    "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome check --write ."
-  },
-  "engines": {
-    "node": "24.x"
   },
   "dependencies": {
     "hono": "^4.13.13"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
+    "@hono/vite-dev-server": "^0.26.1",
     "@types/node": "^26.6.4",
-    "concurrently": "^10.0.5",
-    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vite-ssr-components": "^0.8.0",
     "wrangler": "^4.147.0"
   }
 }
