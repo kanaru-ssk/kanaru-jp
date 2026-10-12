@@ -3,7 +3,7 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node"],
+    "types": ["vite/client", "node"],
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,5 +16,5 @@
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["**/*"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "dist-server", "node_modules"]
 }

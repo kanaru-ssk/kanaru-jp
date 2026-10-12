@@ -1,28 +1,29 @@
 name: Deploy
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: "deploy"
-  cancel-in-progress: true
+  release:
+    types:
+      - published
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yaml
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
           cache: "npm"
+
       - run: npm ci
+
       - run: npm run build
+
       - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

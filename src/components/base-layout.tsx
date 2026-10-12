@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "hono/jsx";
+import { Link, ViteClient } from "vite-ssr-components/hono";
 import { Logo } from "@/components/logo";
 import { BASE_URL, EMAIL } from "@/lib/constant";
 import { DEFAULT_LANG, LANGS, type Lang } from "@/lib/lang";
@@ -41,7 +42,8 @@ export function BaseLayout({ lang, title, descriptions, children }: Props) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
-        <link href="/global.css" rel="stylesheet" />
+        <ViteClient />
+        <Link href="/src/styles/global.css" rel="stylesheet" />
 
         <link href={canonicalUrl} rel="canonical" />
         <link href={BASE_URL} hreflang="en" rel="alternate" />
