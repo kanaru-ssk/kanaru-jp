@@ -26,8 +26,8 @@ app.notFound((c) => {
 	});
 });
 
-app.onError((c) => {
-	console.error(c.error);
+app.onError((err, c) => {
+	console.error(err);
 	const meta = getMeta(DEFAULT_LANG);
 	c.status(500);
 	return c.render(<h1>500 Internal Server Error</h1>, {
