@@ -1,14 +1,7 @@
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, ViteClient } from "vite-ssr-components/hono";
 import { Logo } from "./components/logo";
-import {
-	BASE_URL,
-	EMAIL,
-	GITHUB_URL,
-	LINKEDIN_URL,
-	NOTE_URL,
-	X_URL,
-} from "./lib/constant";
+import { BASE_URL, EMAIL, SOCIAL_LINKS } from "./lib/constant";
 import { DEFAULT_LANG, LANG, LANGS } from "./lib/lang";
 import type { Meta } from "./lib/meta";
 
@@ -33,7 +26,7 @@ export const renderer = jsxRenderer(
 			email: EMAIL,
 			url: canonicalUrl,
 			image: avatarUrl,
-			sameAs: [GITHUB_URL, LINKEDIN_URL, X_URL, NOTE_URL],
+			sameAs: SOCIAL_LINKS.map((link) => link.url),
 		};
 
 		return (

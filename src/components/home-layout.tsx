@@ -1,14 +1,9 @@
-import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "../lib/constant";
+import { EMAIL, SOCIAL_LINKS } from "../lib/constant";
 
 type Props = {
 	title: string;
 	descriptions: string[];
 };
-
-const links = [
-	{ label: "GitHub", url: GITHUB_URL },
-	{ label: "LinkedIn", url: LINKEDIN_URL },
-];
 
 export function HomeLayout({ title, descriptions }: Props) {
 	return (
@@ -28,7 +23,7 @@ export function HomeLayout({ title, descriptions }: Props) {
 			</div>
 
 			<p class="links">
-				{links.map((link) => (
+				{SOCIAL_LINKS.map((link) => (
 					<a href={link.url} rel="noopener noreferrer" target="_blank">
 						{link.label}
 					</a>

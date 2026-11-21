@@ -26,6 +26,24 @@ describe("GET /", () => {
 		expect(body).toContain('<meta property="og:locale" content="en_US"/>');
 		expect(body).not.toContain("noindex");
 	});
+
+	it("SNS リンクと JSON-LD の sameAs は GitHub, X, LinkedIn の順", async () => {
+		const { body } = await html("/");
+		const urls = [
+			"https://github.com/kanaru-ssk",
+			"https://x.com/kanaru_ssk",
+			"https://www.linkedin.com/in/kanaru-ssk/",
+		];
+		const json = body.match(
+			/<script type="application\/ld\+json">(.*?)<\/script>/,
+		)?.[1];
+		expect(JSON.parse(json ?? "{}").sameAs).toEqual(urls);
+		const main = body.slice(body.indexOf("<main>"));
+		const positions = urls.map((url) => main.indexOf(`href="${url}"`));
+		expect(positions.every((p) => p !== -1)).toBe(true);
+		expect(positions).toEqual([...positions].sort((a, b) => a - b));
+		expect(body).not.toContain("note.com");
+	});
 });
 
 describe("GET /ja", () => {
@@ -63,5 +81,6 @@ describe("エラーページ", () => {
 		const { res, body } = await html("/__test-error");
 		expect(res.status).toBe(500);
 		expect(body).toContain('<meta name="robots" content="noindex, nofollow"/>');
+		expect(body).toContain('<a href="/">Return Home</a>');
 	});
 });
