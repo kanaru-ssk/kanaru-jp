@@ -33,12 +33,11 @@ Based on the [@cloudensis/create-hono](https://github.com/cloudensis/create-hono
 
 `index.ts` / `index.tsx` under `src/routes` become routes. Export handlers named after HTTP methods (`GET`, `POST`, ...).
 
-| File                          | Path           |
-| ----------------------------- | -------------- |
-| `routes/index.tsx`            | `/`            |
-| `routes/en/index.tsx`         | `/en`          |
-| `routes/ja/index.tsx`         | `/ja`          |
-| `routes/sitemap.xml/index.ts` | `/sitemap.xml` |
+| File                  | Path  |
+| --------------------- | ----- |
+| `routes/index.tsx`    | `/`   |
+| `routes/en/index.tsx` | `/en` |
+| `routes/ja/index.tsx` | `/ja` |
 
 Routes that export `ssg = true` are written to static assets by `npm run build` (`scripts/ssg.mjs`). Other requests, including 404s, are handled by the Worker.
 
