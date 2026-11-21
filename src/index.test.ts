@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import app from "./index";
+import { SECURITY_HEADERS } from "./lib/security-headers";
 
 // onError の確認用。ルーターは初回リクエストで確定するため、リクエスト前に登録する
 app.get("/__test-error", () => {
@@ -9,6 +10,15 @@ app.get("/__test-error", () => {
 const html = async (path: string) => {
 	const res = await app.request(path);
 	return { res, body: await res.text() };
+};
+
+// CSP はテスト（開発モード）では付けないため除外する
+const { "Content-Security-Policy": _, ...headersWithoutCsp } = SECURITY_HEADERS;
+
+const expectSecurityHeaders = (res: Response) => {
+	for (const [name, value] of Object.entries(headersWithoutCsp)) {
+		expect(res.headers.get(name)).toBe(value);
+	}
 };
 
 describe("GET /", () => {
@@ -28,6 +38,7 @@ describe("GET /", () => {
 			'<meta property="og:locale:alternate" content="ja_JP"/>',
 		);
 		expect(body).not.toContain("noindex");
+		expectSecurityHeaders(res);
 	});
 
 	it("meta description は短い要約を使う", async () => {
@@ -79,6 +90,7 @@ describe("リダイレクト", () => {
 		const res = await app.request(path);
 		expect(res.status).toBe(301);
 		expect(res.headers.get("location")).toMatch(new RegExp(`${location}$`));
+		expectSecurityHeaders(res);
 	});
 });
 
@@ -89,6 +101,7 @@ describe("エラーページ", () => {
 		expect(body).toContain('<meta name="robots" content="noindex, nofollow"/>');
 		expect(body).not.toContain('rel="canonical"');
 		expect(body).toContain('<a href="/">Return Home</a>');
+		expectSecurityHeaders(res);
 	});
 
 	it("ハンドラーの例外は 500 で noindex", async () => {
@@ -96,5 +109,6 @@ describe("エラーページ", () => {
 		expect(res.status).toBe(500);
 		expect(body).toContain('<meta name="robots" content="noindex, nofollow"/>');
 		expect(body).toContain('<a href="/">Return Home</a>');
+		expectSecurityHeaders(res);
 	});
 });

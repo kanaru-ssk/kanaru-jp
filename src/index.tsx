@@ -4,10 +4,12 @@ import { ErrorLayout } from "./components/error-layout";
 import { DEFAULT_LANG } from "./lib/lang";
 import { getMeta } from "./lib/meta";
 import { type RouteModule, registerRoutes } from "./lib/router";
+import { securityHeaders } from "./lib/security-headers";
 import { renderer } from "./renderer";
 
 const app = new Hono();
 
+app.use(securityHeaders());
 app.use(trimTrailingSlash({ alwaysRedirect: true }));
 app.use(renderer);
 
