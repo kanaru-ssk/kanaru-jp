@@ -1,5 +1,5 @@
 export const BASE_URL = "https://kanaru.jp";
-export const EMAIL = "kanaru.ssk@gmail.com";
+export const EMAIL = "contact@kanaru.jp";
 export const CAREER_START_DATE = new Date("2021-02");
 
 export const GITHUB_URL = "https://github.com/kanaru-ssk";
