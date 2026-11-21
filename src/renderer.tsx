@@ -2,8 +2,9 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, ViteClient } from "vite-ssr-components/hono";
 import { Logo } from "./components/logo";
 import { BASE_URL, EMAIL, SOCIAL_LINKS } from "./lib/constant";
-import { DEFAULT_LANG, LANG, LANGS } from "./lib/lang";
+import { DEFAULT_LANG, getLangPath, LANGS, LOCALE } from "./lib/lang";
 import type { Meta } from "./lib/meta";
+import { getLangUrl } from "./lib/url";
 
 type Render = (content: string | Promise<string>, meta: Meta) => Response;
 
@@ -13,9 +14,10 @@ declare module "hono" {
 
 export const renderer = jsxRenderer(
 	({ children, lang, title, description, noindex }) => {
-		const canonicalUrl = `${BASE_URL}${lang === DEFAULT_LANG ? "" : `/${lang}`}`;
+		const canonicalUrl = getLangUrl(lang);
 		const currentYear = new Date().getFullYear();
 		const avatarUrl = `${BASE_URL}/avatar.webp`;
+		const ogImageUrl = `${BASE_URL}/ogp.png`;
 
 		const jsonLd = {
 			"@context": "https://schema.org",
@@ -42,28 +44,37 @@ export const renderer = jsxRenderer(
 					<Link href="/src/style.css" rel="stylesheet" />
 					<ViteClient />
 
-					<link rel="canonical" href={canonicalUrl} />
-					<link rel="alternate" hreflang="en" href={BASE_URL} />
-					<link rel="alternate" hreflang="ja" href={`${BASE_URL}/ja`} />
-					<link rel="alternate" hreflang="x-default" href={BASE_URL} />
+					{!noindex && (
+						<>
+							<link rel="canonical" href={canonicalUrl} />
+							{LANGS.map((l) => (
+								<link rel="alternate" hreflang={l} href={getLangUrl(l)} />
+							))}
+							<link
+								rel="alternate"
+								hreflang="x-default"
+								href={getLangUrl(DEFAULT_LANG)}
+							/>
+						</>
+					)}
 
 					<title>{title}</title>
 					<meta name="description" content={description} />
 					<meta property="og:title" content={title} />
 					<meta property="og:site_name" content={title} />
 					<meta property="og:description" content={description} />
-					<meta property="og:image" content={`${BASE_URL}/ogp.png`} />
+					<meta property="og:image" content={ogImageUrl} />
 					<meta property="og:image:width" content="1200" />
 					<meta property="og:image:height" content="630" />
-					<meta property="og:url" content={canonicalUrl} />
+					{!noindex && <meta property="og:url" content={canonicalUrl} />}
 					<meta property="og:type" content="website" />
-					<meta
-						property="og:locale"
-						content={lang === LANG.JAPANESE ? "ja_JP" : "en_US"}
-					/>
+					<meta property="og:locale" content={LOCALE[lang]} />
+					{LANGS.filter((l) => l !== lang).map((l) => (
+						<meta property="og:locale:alternate" content={LOCALE[l]} />
+					))}
 					<meta name="twitter:title" content={title} />
 					<meta name="twitter:description" content={description} />
-					<meta name="twitter:image" content={`${BASE_URL}/ogp.png`} />
+					<meta name="twitter:image" content={ogImageUrl} />
 					<meta name="twitter:card" content="summary_large_image" />
 					{noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -83,7 +94,7 @@ export const renderer = jsxRenderer(
 								lang === l ? (
 									<span>{l}</span>
 								) : (
-									<a href={l === DEFAULT_LANG ? "/" : `/${l}`} hreflang={l}>
+									<a href={getLangPath(l)} hreflang={l}>
 										{l}
 									</a>
 								),

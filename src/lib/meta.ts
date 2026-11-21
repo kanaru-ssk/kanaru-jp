@@ -9,6 +9,7 @@ export type Meta = {
 	description: string;
 	/** ページ本文の段落 */
 	descriptions: string[];
+	/** true のときは noindex を付け、canonical と hreflang を出さない（エラーページ用） */
 	noindex?: boolean;
 };
 

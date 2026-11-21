@@ -16,14 +16,17 @@ describe("GET /", () => {
 		const { res, body } = await html("/");
 		expect(res.status).toBe(200);
 		expect(body).toContain('<html lang="en">');
-		expect(body).toContain('<link rel="canonical" href="https://kanaru.jp"/>');
+		expect(body).toContain('<link rel="canonical" href="https://kanaru.jp/"/>');
 		expect(body).toContain(
 			'<link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>',
 		);
 		expect(body).toContain(
-			'<link rel="alternate" hreflang="x-default" href="https://kanaru.jp"/>',
+			'<link rel="alternate" hreflang="x-default" href="https://kanaru.jp/"/>',
 		);
 		expect(body).toContain('<meta property="og:locale" content="en_US"/>');
+		expect(body).toContain(
+			'<meta property="og:locale:alternate" content="ja_JP"/>',
+		);
 		expect(body).not.toContain("noindex");
 	});
 
@@ -84,6 +87,7 @@ describe("エラーページ", () => {
 		const { res, body } = await html("/unknown");
 		expect(res.status).toBe(404);
 		expect(body).toContain('<meta name="robots" content="noindex, nofollow"/>');
+		expect(body).not.toContain('rel="canonical"');
 		expect(body).toContain('<a href="/">Return Home</a>');
 	});
 

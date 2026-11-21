@@ -4,10 +4,12 @@
     <loc>https://kanaru.jp/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanaru.jp/"/>
   </url>
   <url>
     <loc>https://kanaru.jp/ja</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanaru.jp/"/>
   </url>
 </urlset>

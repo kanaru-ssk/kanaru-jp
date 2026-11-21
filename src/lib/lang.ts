@@ -6,6 +6,17 @@ export const LANGS = Object.values(LANG);
 export const DEFAULT_LANG = LANG.ENGLISH;
 export type Lang = (typeof LANGS)[number];
 
+/** og:locale に使うロケール */
+export const LOCALE = {
+	en: "en_US",
+	ja: "ja_JP",
+} as const satisfies Record<Lang, string>;
+
+/** 各言語のトップページのパス。デフォルト言語は `/`、それ以外は `/{lang}` */
+export function getLangPath(lang: Lang): string {
+	return lang === DEFAULT_LANG ? "/" : `/${lang}`;
+}
+
 export function getDictionary(lang: Lang, yearOfExperience: number) {
 	if (lang === LANG.JAPANESE) {
 		return {
