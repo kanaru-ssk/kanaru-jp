@@ -12,6 +12,10 @@ declare module "hono" {
 	interface ContextRenderer extends Render {}
 }
 
+/** `</script>` などで script 要素から抜けられないよう `<` をエスケープする */
+const toJsonLd = (value: unknown): string =>
+	JSON.stringify(value).replace(/</g, "\\u003c");
+
 export const renderer = jsxRenderer(
 	({ children, lang, title, description, noindex }) => {
 		const canonicalUrl = getLangUrl(lang);
@@ -82,7 +86,7 @@ export const renderer = jsxRenderer(
 
 					<script
 						type="application/ld+json"
-						dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+						dangerouslySetInnerHTML={{ __html: toJsonLd(jsonLd) }}
 					/>
 				</head>
 
