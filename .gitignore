@@ -1,21 +1,6 @@
-# build output
-dist/
-dist-server/
-# wrangler local state
-.wrangler/
-
-# dependencies
 node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+.cloudflare
+.wrangler
+.env*
+.dev.vars
 .DS_Store

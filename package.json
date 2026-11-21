@@ -1,24 +1,25 @@
 {
-  "name": "kanaru-jp",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build && node scripts/ssg.ts",
-    "preview": "$npm_execpath run build && wrangler dev",
-    "typecheck": "tsc --noEmit",
-    "lint": "biome check .",
-    "format": "biome check --write ."
-  },
-  "dependencies": {
-    "hono": "^4.13.13"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.5.15",
-    "@hono/vite-dev-server": "^0.26.1",
-    "@types/node": "^26.6.4",
-    "typescript": "^7.0.2",
-    "vite": "^8.3.4",
-    "vite-ssr-components": "^0.8.0",
-    "wrangler": "^4.149.0"
-  }
+	"name": "kanaru-jp",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "cf dev",
+		"build": "cf build && node scripts/ssg.mjs",
+		"lint": "biome check",
+		"format": "biome check --write --unsafe",
+		"typecheck": "cf workers types && tsc",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"hono": "^4.13.19"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.6.8",
+		"@cloudflare/vite-plugin": "^2.0.0-rc.1",
+		"cf": "^1.0.0-rc.1",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.8",
+		"vite-ssr-components": "^0.9.0",
+		"vitest": "^5.1.1"
+	}
 }
