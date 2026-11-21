@@ -1,4 +1,9 @@
-export function NotFoundLayout() {
+type Props = {
+	title: string;
+	messages: string[];
+};
+
+export function ErrorLayout({ title, messages }: Props) {
 	return (
 		<>
 			<div class="profile">
@@ -12,13 +17,16 @@ export function NotFoundLayout() {
 					src="/avatar-sad.webp"
 					width={256}
 				/>
-				<h1>404 Not Found</h1>
+				<h1>{title}</h1>
 			</div>
 
 			<p>
-				Sorry, we couldn’t find the page you were looking for.
-				<br />
-				It might have been moved or deleted.
+				{messages.map((message, i) => (
+					<>
+						{i !== 0 && <br />}
+						{message}
+					</>
+				))}
 			</p>
 			<p>
 				<a href="/">Return Home</a>

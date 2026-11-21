@@ -6,13 +6,26 @@ export const LANGS = Object.values(LANG);
 export const DEFAULT_LANG = LANG.ENGLISH;
 export type Lang = (typeof LANGS)[number];
 
+/** og:locale に使うロケール */
+export const LOCALE = {
+	en: "en_US",
+	ja: "ja_JP",
+} as const satisfies Record<Lang, string>;
+
+/** 各言語のトップページのパス。デフォルト言語は `/`、それ以外は `/{lang}` */
+export function getLangPath(lang: Lang): string {
+	return lang === DEFAULT_LANG ? "/" : `/${lang}`;
+}
+
 export function getDictionary(lang: Lang, yearOfExperience: number) {
 	if (lang === LANG.JAPANESE) {
 		return {
 			title: "佐々木 哉瑠",
+			description:
+				"ソフトウェアエンジニアの佐々木 哉瑠です。主に Go、TypeScript、Hono、Next.js、Cloudflare、Google Cloud、AWS を使って開発しています。開発の相談や技術的な質問をお気軽にどうぞ。",
 			descriptions: [
 				"ソフトウェアエンジニアをしています。",
-				`実務経験 ${yearOfExperience} 年で、主にGo、TypeScript、hono、Next.js、Cloudflare、GoogleCloud、AWS、Claude Codeを使用しています。`,
+				`実務経験 ${yearOfExperience} 年で、主に Go、TypeScript、Hono、Next.js、Cloudflare、Google Cloud、AWS、Claude Code を使用しています。`,
 				"開発の相談や技術的な質問など、お気軽に上記の LinkedIn またはメールアドレスに連絡してください。",
 			],
 		};
@@ -20,6 +33,8 @@ export function getDictionary(lang: Lang, yearOfExperience: number) {
 
 	return {
 		title: "Kanaru Sasaki",
+		description:
+			"Kanaru Sasaki is a software engineer in Japan working with Go, TypeScript, Hono, Next.js, Cloudflare, Google Cloud and AWS. Open to development inquiries.",
 		descriptions: [
 			"I'm a software engineer in Japan (remote).",
 			`I have ${yearOfExperience} years of professional experience and primarily work with Go, TypeScript, Hono, Next.js, Cloudflare, Google Cloud, AWS, and Claude Code.`,

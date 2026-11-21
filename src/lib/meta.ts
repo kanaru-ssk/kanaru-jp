@@ -5,7 +5,11 @@ import { getDictionary, type Lang } from "./lang";
 export type Meta = {
 	lang: Lang;
 	title: string;
+	/** meta description / OGP / JSON-LD 用の短い要約 */
+	description: string;
+	/** ページ本文の段落 */
 	descriptions: string[];
+	/** true のときは noindex を付け、canonical と hreflang を出さない（エラーページ用） */
 	noindex?: boolean;
 };
 
