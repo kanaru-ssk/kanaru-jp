@@ -1,8 +1,15 @@
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, ViteClient } from "vite-ssr-components/hono";
 import { Logo } from "./components/logo";
-import { BASE_URL, EMAIL } from "./lib/constant";
-import { DEFAULT_LANG, LANGS } from "./lib/lang";
+import {
+	BASE_URL,
+	EMAIL,
+	GITHUB_URL,
+	LINKEDIN_URL,
+	NOTE_URL,
+	X_URL,
+} from "./lib/constant";
+import { DEFAULT_LANG, LANG, LANGS } from "./lib/lang";
 import type { Meta } from "./lib/meta";
 
 type Render = (content: string | Promise<string>, meta: Meta) => Response;
@@ -26,11 +33,7 @@ export const renderer = jsxRenderer(
 			email: EMAIL,
 			url: canonicalUrl,
 			image: avatarUrl,
-			sameAs: [
-				"https://github.com/kanaru-ssk",
-				"https://x.com/kanaru_ssk",
-				"https://note.com/kanaru_ssk",
-			],
+			sameAs: [GITHUB_URL, LINKEDIN_URL, X_URL, NOTE_URL],
 		};
 
 		return (
@@ -58,8 +61,14 @@ export const renderer = jsxRenderer(
 					<meta property="og:site_name" content={title} />
 					<meta property="og:description" content={description} />
 					<meta property="og:image" content={`${BASE_URL}/ogp.png`} />
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
 					<meta property="og:url" content={canonicalUrl} />
 					<meta property="og:type" content="website" />
+					<meta
+						property="og:locale"
+						content={lang === LANG.JAPANESE ? "ja_JP" : "en_US"}
+					/>
 					<meta name="twitter:title" content={title} />
 					<meta name="twitter:description" content={description} />
 					<meta name="twitter:image" content={`${BASE_URL}/ogp.png`} />

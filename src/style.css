@@ -40,10 +40,7 @@ footer {
 
 h1 {
 	font-size: 24px;
-	background: var(--text);
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: var(--text);
 }
 
 a {

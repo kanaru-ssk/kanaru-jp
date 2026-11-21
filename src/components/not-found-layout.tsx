@@ -3,7 +3,7 @@ export function NotFoundLayout() {
 		<>
 			<div class="profile">
 				<img
-					alt="avatar"
+					alt=""
 					class="avatar"
 					decoding="sync"
 					fetchpriority="high"
@@ -21,7 +21,7 @@ export function NotFoundLayout() {
 				It might have been moved or deleted.
 			</p>
 			<p>
-				<a href="/"> Return Home </a>
+				<a href="/">Return Home</a>
 			</p>
 		</>
 	);

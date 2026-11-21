@@ -1,8 +1,6 @@
-import { LANG } from "../../lib/lang";
-import { homeHandler } from "../home";
+import type { Handler } from "hono";
 
-const ssg = true;
+// 英語版は / が正規の URL のため、重複を避けてリダイレクトする
+const GET: Handler = (c) => c.redirect("/", 301);
 
-const GET = homeHandler(LANG.ENGLISH);
-
-export { GET, ssg };
+export { GET };

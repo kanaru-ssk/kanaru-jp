@@ -3,19 +3,11 @@
   <url>
     <loc>https://kanaru.jp/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>
-  </url>
-  <url>
-    <loc>https://kanaru.jp/en</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>
   </url>
   <url>
     <loc>https://kanaru.jp/ja</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://kanaru.jp/en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://kanaru.jp/ja"/>
   </url>
 </urlset>

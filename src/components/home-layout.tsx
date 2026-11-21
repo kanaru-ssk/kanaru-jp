@@ -1,4 +1,4 @@
-import { EMAIL } from "../lib/constant";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "../lib/constant";
 
 type Props = {
 	title: string;
@@ -6,14 +6,8 @@ type Props = {
 };
 
 const links = [
-	{
-		label: "GitHub",
-		url: "https://github.com/kanaru-ssk",
-	},
-	{
-		label: "LinkedIn",
-		url: "https://www.linkedin.com/in/kanaru-ssk/",
-	},
+	{ label: "GitHub", url: GITHUB_URL },
+	{ label: "LinkedIn", url: LINKEDIN_URL },
 ];
 
 export function HomeLayout({ title, descriptions }: Props) {
@@ -21,7 +15,7 @@ export function HomeLayout({ title, descriptions }: Props) {
 		<>
 			<div class="profile">
 				<img
-					alt="avatar"
+					alt={title}
 					class="avatar"
 					decoding="sync"
 					fetchpriority="high"
