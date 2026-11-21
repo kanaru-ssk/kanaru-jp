@@ -12,7 +12,7 @@ export function getDictionary(lang: Lang, yearOfExperience: number) {
 			title: "佐々木 哉瑠",
 			descriptions: [
 				"ソフトウェアエンジニアをしています。",
-				`実務経験 ${yearOfExperience} 年で、主にGo、TypeScript、hono、Next.js、Cloudflare、GoogleCloud、AWS、Claude Codeを使用しています。`,
+				`実務経験 ${yearOfExperience} 年で、主に Go、TypeScript、Hono、Next.js、Cloudflare、Google Cloud、AWS、Claude Code を使用しています。`,
 				"開発の相談や技術的な質問など、お気軽に上記の LinkedIn またはメールアドレスに連絡してください。",
 			],
 		};
