@@ -12,8 +12,7 @@ declare module "hono" {
 }
 
 export const renderer = jsxRenderer(
-	({ children, lang, title, descriptions, noindex }) => {
-		const description = descriptions.join(" ");
+	({ children, lang, title, description, noindex }) => {
 		const canonicalUrl = `${BASE_URL}${lang === DEFAULT_LANG ? "" : `/${lang}`}`;
 		const currentYear = new Date().getFullYear();
 		const avatarUrl = `${BASE_URL}/avatar.webp`;

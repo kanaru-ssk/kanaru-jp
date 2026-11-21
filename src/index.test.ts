@@ -27,6 +27,16 @@ describe("GET /", () => {
 		expect(body).not.toContain("noindex");
 	});
 
+	it("meta description は短い要約を使う", async () => {
+		const { body } = await html("/");
+		const description = body.match(
+			/<meta name="description" content="([^"]*)"/,
+		)?.[1];
+		expect(description).toBeDefined();
+		expect(description?.length).toBeLessThanOrEqual(160);
+		expect(description).not.toContain("above");
+	});
+
 	it("SNS リンクと JSON-LD の sameAs は GitHub, X, LinkedIn の順", async () => {
 		const { body } = await html("/");
 		const urls = [
