@@ -8,6 +8,11 @@ on:
 permissions:
   contents: read
 
+# リリースが続けて作られても、デプロイを同時に走らせない
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 jobs:
   test:
     uses: ./.github/workflows/test.yaml
@@ -15,11 +20,13 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    # シークレットは production Environment に置き、このジョブからだけ参照する
+    environment: production
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 26
+          node-version-file: .node-version
           cache: npm
       - run: npm ci
       - run: npm run build

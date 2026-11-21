@@ -2,13 +2,16 @@
 	"name": "kanaru-jp",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": ">=26"
+	},
 	"scripts": {
 		"dev": "cf dev",
 		"build": "cf build && node scripts/ssg.mjs",
 		"lint": "biome check",
 		"format": "biome check --write --unsafe",
 		"typecheck": "cf workers types && tsc",
-		"test": "vitest"
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"hono": "^4.13.19"
